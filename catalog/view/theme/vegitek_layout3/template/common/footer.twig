@@ -1,0 +1,101 @@
+<footer>
+   <div id="footer">
+     <div class="footer_top">
+      <div class="container">
+	    <div class="row">
+			{{ footer_top }}
+		</div>
+	  </div>
+	 </div>
+
+      <div class="footer_center">
+         <div class="container">
+            <div class="row">
+               <div class="col-sm-3 column first">
+			      <div class="footer-logo">
+					<div id="logo">{% if footerlogo %}<a href="{{ home }}"><img src="{{ footerlogo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive" /></a>{% else %}
+					  <h1><a href="{{ home }}">{{ name }}</a></h1>
+					  {% endif %}
+					</div>
+			      </div>
+				  {{ footer_left }}
+               </div>
+               {% if informations %}
+               <div class="col-sm-3 column second">
+                  <h5>{{ text_information }}</h5>
+                  <ul class="list-unstyled">
+                     {% for information in informations %}
+                     <li><a href="{{ information.href }}">{{ information.title }}</a></li>
+                     {% endfor %}
+                     <li><a href="{{ contact }}">{{ text_contact }}</a></li>
+                  </ul>
+               </div>
+               {% endif %}
+               <div class="col-sm-3 column third">
+                  <h5>{{ text_extra }}</h5>
+                  <ul class="list-unstyled">
+				    {% if module_status %}
+					    <li><a href="{{ gallery_album }}">{{ text_gallery }}</a></li>
+				    {% endif %}
+                     <li><a href="{{ manufacturer }}">{{ text_manufacturer }}</a></li>
+                     {#<li><a href="{{ voucher }}">{{ text_voucher }}</a></li>
+                       
+                     <li><a href="{{ affiliate }}">{{ text_affiliate }}</a></li>
+                     #}
+                     <li><a href="{{ special }}">{{ text_special }}</a></li>
+                     <li><a href="{{ account }}">{{ text_account }}</a></li> 
+                     <li><a href="{{ sitemap }}">{{ text_sitemap }}</a></li>
+                  </ul>
+               </div>
+			   {% if informations %}
+               <div class="col-sm-3 column forth">
+			    {{ footer_right }}
+				
+				{# <div class="ttmgallery-content gallery_album_carousel">
+				
+				 {% for row in gallery_albums|batch(2, 'No item') %}
+				 <div class="gallery">
+				 {% for gallery_image in row %}
+					<div class="gallery_album">
+					   <div class="gallery-thumbnail">
+						  <a class="gallery-image" href="{{ gallery_image.url }}" title="{{ text_gallerytitle }}"><img src="{{ gallery_image.image}}" class="img-responsive image" >
+						  </a>
+					   </div>
+					</div> 
+					{% endfor %} 
+					</div>					
+				 {% endfor %} 
+				</div> #}
+				
+			   </div>
+			    {% endif %}
+				
+            </div>
+         </div>
+      </div>
+	  
+	  <div class="footer_middle">
+         <div class="container">
+			<div class="row">
+			   {{ footer_middle }}
+			</div>
+	     </div>
+	  </div>
+      <div class="footer_bottom">
+         <div class="container">
+            <div class="copyright-block"></div>
+            {{ footer_bottom }}
+         </div>
+      </div>
+   </div>
+</footer>
+{% for script in scripts %}
+<script src="{{ script }}" type="text/javascript"></script>
+{% endfor %}
+<!--
+   OpenCart is open source software and you are free to remove the powered by OpenCart if you want, but its generally accepted practise to make a small donation.
+   Please donate via PayPal to donate@opencart.com
+   //--> 
+</main>
+</section>
+</body></html>

@@ -1,0 +1,154 @@
+<div id="ttm_category_tab" class="ttm_category_tab box">
+   <div class="container">
+      <div class="heading-title">
+         <div class="main-heading-text">{{ heading_text }}</div>
+         <div class="main-heading">{{ cat_heading_title }}</div>
+      </div>
+      <div class="tabs">
+         <div class="ttm_category_tabs">
+            <ul class="nav nav-tabs">
+               {% set cnt = 0 %} 
+               {% for category in categories %}
+               {{ category.category_tab }}
+               {% endfor %}
+            </ul>
+         </div>
+
+         <div class="tab-content">
+            {% for category in categories %}
+            {{ category.category_div }}
+           
+			<div class="category_tab_carousel owl-carousel ttm-product-box">
+               {% for product in products %}	
+               <div class="product-slider">
+                     <div class="product-block product-thumb">
+                        <div class="product-thumb-inner">
+                           <div class="image">
+                              {% if product.thumb_swap %}
+                              <a href="{{ product.href }}">
+                              <img src="{{ product.thumb }}" title="{{ product.name }}" alt="{{ product.name }}" class="img-responsive reg-image"/>
+                              <img class="img-responsive hover-image" src="{{ product.thumb_swap }}" title="{{ product.name }}" alt="{{ product.name }}"/>
+                              </a>
+                              {% else %}
+                              <a href="{{ product.href }}">
+                              <img src="{{ product.thumb }}" title="{{ product.name }}" alt="{{ product.name }}" class="img-responsive"/></a>
+                              {% endif %}
+                              {% if not product.special %}        
+                              {% else %}
+                              <div class="saleback">
+                                 <span class="saleicon sale">{{ text_sale }}</span>         
+                              </div>
+                              {% endif %}
+							  {% if product.is_new %}
+							   <div class="label_new"><span>{{ text_new }}</span></div>
+						      {% endif %}
+							  
+							  
+                              <div class="rating">
+                                 {% for i in 1..5 %}
+                                 {% if product.rating < i %}
+                                 <span class="fa fa-stack"><i class="fa fa-star off fa-stack-2x"></i></span>
+                                 {% else %}
+                                 <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                 {% endif %}
+                                 {% endfor %}
+                              </div>
+							  
+                              <div class="button-group">
+                                 <button type="button" data-toggle="tooltip" data-placement="top" class="addtocart{% if product.product_quantity<=0 %} {{ "disabled" }} {% endif %}" title="{% if product.product_quantity <=0 %}{{ product.product_stock }}{% else %}{{ button_cart }}{% endif %}" onclick="{% if product.product_quantity <=0 %}{% else %}cart.add('{{ product.product_id }}');('{{ product.product_id }}'){% endif %}"{% if product.product_quantity <=0 %}{{ "" }} {% endif %}>
+								{% if product.product_quantity <=0 %}
+								{{ "<span class=\"outofstock\">"~product.product_stock }}
+								{% else %} 
+								{{ "<span class=\"hidden-xs hidden-sm hidden-md\">"~button_cart }}
+								{% endif %}
+								</span></button>
+                                 <div class="quickview" data-toggle="tooltip"  data-placement="top" title="{{ button_quickview }}" ><a href="{{ product.quick }}">{{ button_quickview }}</a></div>
+                                 <button class="wishlist" data-toggle="tooltip" data-placement="top" type="button" title="{{ button_wishlist }} " onclick="wishlist.add('{{ product.product_id }} ');"></button>
+                                 <button class="compare" data-toggle="tooltip" type="button" data-placement="top" title="{{ button_compare }} " onclick="compare.add('{{ product.product_id }} ');"></button>
+                              </div>
+                           </div>
+                           <div class="caption">
+						   {# <div class="ttmprogressbar">
+								<span id="QuantityAvailable">{% if product.product_quantity <=0 %}{{product_unavailable}}:{% else %}{{product_available}}:{% endif %}</span>
+								<span id="quantity" name="quantity">{{product.product_quantity}}</span>
+								<div class="progress">
+									<div class="progress-bar" role="progressbar"></div>
+								</div>
+							</div> #}
+							<p class="description">{{ product.description [0:30] ~ '...' }} </p>
+							
+                              <h4><a href="{{ product.href }} ">{{ product.name }} </a></h4>
+                              
+                              
+                              {% if product.price %}
+                              <p class="price">
+                                 {% if not product.special %}
+                                 {{ product.price }}
+                                 {% else %}
+                                 <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+                                 {% endif %}
+                                 {% if product.tax %}
+                                 <span class="price-tax">{{ text_tax }} {{ product.tax }}</span>
+                                 {% endif %}
+                                 {% if product.special %}
+                                 <span class="percentsaving">{{ product.percentsaving }}%</span>
+                                 {% endif %}						
+                              </p>
+                              {% endif %}
+                           </div>
+                        </div>
+                     </div>
+                 
+               </div>
+               {% endfor %}
+            </div>
+           
+         </div>
+         {% endfor %}
+      </div>
+   </div>
+</div>
+</div>
+<script>
+function {{ string }}Ajaxload(category_id) {
+   	var catdatas = {{ setting|json_encode() }};
+   	var Senddata = {'category_id' : category_id, 'setting' : catdatas } ;
+   	$.ajax({
+   		type: 'POST',
+   		data: Senddata,
+		url: 'index.php?route=extension/module/ttmcategorytab/AjaxLoad',
+   		success: function (data) {
+   			$('#ttm_category_tab').replaceWith(data);
+   			var _0xa529 = [
+    '#ttm_category_tab\x20.category_tab_carousel',
+    'owlCarousel'
+];
+(function (_0xb74981, _0x215199) {
+    var _0x14609f = function (_0x1d84d2) {
+        while (--_0x1d84d2) {
+            _0xb74981['push'](_0xb74981['shift']());
+        }
+    };
+    _0x14609f(++_0x215199);
+}(_0xa529, 0x1e5));
+var _0x4ab0 = function (_0xb74981, _0x215199) {
+    _0xb74981 = _0xb74981 - 0x0;
+    var _0x14609f = _0xa529[_0xb74981];
+    return _0x14609f;
+};
+$(_0x4ab0('0x1'))[_0x4ab0('0x0')]({
+    'dots': ![],
+    'nav': !![],
+    'smartSpeed': 0x3e8,
+    'responsive': {
+        1300: { 'items': 0x4 },
+        980: { 'items': 0x4 },
+        768: { 'items': 0x3 },
+        480: { 'items': 0x2 },
+        320: { 'items': 0x1 }
+    }
+});
+   		}
+   	});
+}
+</script>

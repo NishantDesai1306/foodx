@@ -1,0 +1,40 @@
+<div id="instagram_block_home" class="block">
+
+	{% if error_connect == false %}
+		<p class="text_error_instagram">{{ text_error }}</p>
+	{% else %}
+	
+	{% set sliderFor = 2 %}
+    {% set instagramCount = instagrams|length %}
+		
+		<div class="ttm-instagram-box {% if instagramCount >= sliderFor and grid != 1 %}instagram_carousel {% else %}instagram-grid{% endif %}" id="{% if instagramCount >= sliderFor and grid != 1 %} instagram-carousel{% else %}instagram-grid{% endif %}">
+		
+		{% for row in instagrams|batch(2, 'No item') %}
+     
+           <div class="instagram-items {% if instagramCount >= sliderFor and grid != 1 %}instagram-slider{% else %}instagram-item col-lg-4 col-md-4 col-sm-4 col-xs-6{% endif %}">
+		        
+				{% for instagram in row %}
+				 <div class="instagram-wrapper">
+				 
+					<div class="instagram-block instagram-thumb">
+							<div class="row_items">
+								<a class="instaimg" href="{{ instagram.link }}" target="_blank"><img class="img-thumbnail"src="{{ instagram.image }}" alt="" /></a>
+								{# <p class="post_hover"><a class="icon zoom" title="Click to view Full Image " href="{{ instagram.image }}" data-lightbox="example-set"><i class="fa fa-search"></i></a></p> #}
+								<div class="insta_comments_likes">
+									<span class="insta-likes"> <i class="fa fa-heart"></i> {{ instagram.likes }} </span>
+									{# <span class="insta-comments"> <i class="fa fa-comment"></i> {{ instagram.comment }} </span> #}
+								</div>
+							</div>
+					</div>     
+			
+				 </div>
+               {% endfor %}
+			   
+			</div>
+		{% endfor %}
+		
+		</div>
+		
+    {% endif %}
+
+</div>

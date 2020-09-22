@@ -1,0 +1,59 @@
+
+{% if ttmnewsletters_popup %}
+<div class="ttmnewsletter_wrapper ttm_popup_newsletter" >
+   <div class="ttmnewsletter_popup_inner">
+      <div class="ttmnewsletterpopup-content">
+	  {#   <div class="ttmnewsletterpopup-icon"><i class="fa fa-envelope-open"></i></div> #}
+		<span class="ttmnewsletterpopup-title">{{ heading_title }}</span>
+        <span class="ttmnewsletterpopup-desc">{{ text_description }}</span>
+         <div class="ttmnewsletterpopup-mail">
+            <input type="text" id="subscribe_email" name="mail_subscribe" class="newsletter_email" placeholder="{{ entry_mail_subscribe }}" />
+            <div class="subscribe_button">
+               <button type="submit" class="btn btn-default btn-lg" onclick="return ttmnewsletter.PopupValidateEmail();">{{ subscribe_button }}</button>     
+            </div>
+         </div>
+		{# <div class="ttmnewsletterpopup_social">
+			<ul class="social">
+				<li class="facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+				<li class="twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+				<li class="google_plus"><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+				<li class="pinterest"><a href="#" target="_blank"><i class="fa fa-pinterest-p"></i></a></li>
+			</ul>
+		</div> #}
+         <div class="ttmnewsletterpopup_notice">
+            <input type="checkbox" class="check_newsletter" />
+            <span>{{ text_notification }}</span>
+         </div>
+      </div>
+	  <div class="popup-close btn" onclick="ttmnewsletter.PopupClose();">{{ text_close }}</div>
+   </div>
+</div>
+{% endif %}
+<script>
+   ttmnewsletter.checkCookie();
+</script>
+<div class="ttm-newsletter col-lg-12 col-md-12 col-sm-12 col-xs-12">
+   <div class="newsletter-inner">
+      <div  class="newsletter-details">
+        {#  <span class="newsletter-icon">&nbsp;</span> #}
+          <div class="newsletter-title"><i class="fa fa-envelope"></i> {{ entry_title }}</div> 
+         
+        
+         
+      </div> 
+      <div class="newsletter-wrapper">
+         <form method="post">
+            <div class="form-group required">
+               <label class="col-sm-2 control-label" for="txtemail">{{ entry_email }}</label>
+               <div class="news-content">
+                  <input type="email" name="txtemail" id="txtemail" value="" placeholder="{{ entry_email }}" class="form-control input-lg"  />  
+               </div>
+               <div class="subscribe_button">
+                  <button type="submit" onclick="return ttmnewsletter.ValidateEmail();" class="btn btn-default btn-lg">{{ email_button }}</button>     
+               </div>
+            </div>
+         </form>
+      </div>
+	  <div class="desc"> {{ entry_text }}</div>
+   </div>
+</div>

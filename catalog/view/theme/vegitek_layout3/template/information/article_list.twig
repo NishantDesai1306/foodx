@@ -1,0 +1,74 @@
+{{ header }} 
+<div class="container">
+  <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %} 
+   <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+ {% endfor %}  
+     
+  </ul>
+  <div class="row">{{ column_left }} 
+     {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+   
+    <div id="content" class="{{ class }}">
+      <div class="blog all-blogs">
+	  <!--<h1>{{ text_blogs }}</h1>-->
+      {% if articles %} 
+      {% for blog in articles %} 
+      <div class="blog_post_layout">
+        <h2 class="page-title">{{ text_blogs }}</h2>
+        {% if blog.blog_data %} 
+        {% for topic in blog.blog_data %} 
+        <div class="ttm_blog_item">
+          <div class="ttm-post-outer">
+          
+       {% if topic.image %} 
+       <div class="blog-image-content">
+      <div class="image">
+        <img src="{{ topic.image }}" alt="{{ heading_title }}" title="{{ heading_title }}" class="img-thumbnail" />
+        <div class="blog-hover"></div>
+<p class="post_hover"><a class="icon zoom" title="Click to view Full Image " href="{{ topic.image }}" data-lightbox="example-set"><i class="fa fa-search"></i></a></p>
+      
+        </div>
+      </div>
+      {% endif %} 
+	  <div class="blog-content">
+		  <div class="blog_stats"> 
+		    <div class="view-blog">	
+		      <div class="author"> <i class="fa fa-user"></i>  {{ topic.author }} </div>
+			  {# <span class="date"> <i class="fa fa-calendar"></i>  {{ topic.date_added }} </span> #}
+              <div class="blog-time">
+				    <div class="date-time"> <i class="fa fa-calendar"></i> {{ topic.date_added }} </div>
+			  </div>
+			  <div class="write-comment"> <a href="{{ topic.href }}"><i class="fa fa-comments"></i> {{ topic.total_comments }} {{ entry_comment }}</a> </div>
+			  {# <span> <a href="{{ topic.href }}"> <i class="fa fa-long-arrow-right"></i> {{ text_read_more }}</a> </span> #}
+			 </div>
+		  </div>
+		  
+          <h2 class="blog_title"><a href="{{ topic.href }}" title="{{ topic.title }}">{{ topic.title [0:28] ~ '...' }}</a></h2>
+		  
+           <p> {{ topic.description [0:100] ~ '...'}}  </p>
+		   <p><a href="{{ topic.href }}" class="blog_readmore">{{ text_read_more }}</a> </p>
+		</div>
+          </div>
+        </div>
+        {% endfor %}
+        
+         {% else %}   
+        <div class="panel-body text-center">{{ text_no_blogs }}</div>
+        {% endif %} 
+        </div>
+         {% endfor %}
+       {% else %}   
+      <div class="panel-body text-center">{{ text_no_blogs }}</div>
+               {% endif %} 
+    </div>
+  {{ column_right }}</div>
+</div>
+</div>
+{{ footer }} 

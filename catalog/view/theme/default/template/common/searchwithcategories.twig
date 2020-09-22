@@ -1,0 +1,67 @@
+<div id="search">
+	<div class="search_block_wrapper">	
+
+		<div class="search_by_category">
+		    <select name="category_id" class="form-control" id="searchsort">
+				<option value="0">{{ text_category }}</option>
+				
+{% for category_1 in categories %}
+				<option value="{{ category_1.category_id }}"{% if category_1.category_id == category_id %} selected="selected"{% endif %}>{{ category_1.name }}</option>
+{% for category_2 in category_1.children %}
+				<option value="{{ category_2.category_id }}"{% if category_2.category_id == category_id %} selected="selected"{% endif %}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_2.name }}</option>
+{% for category_3 in category_2.children %}
+				<option value="{{ category_3.category_id }}"{% if category_3.category_id == category_id %} selected="selected"{% endif %}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_3.name }}</option>
+{% endfor %}
+{% endfor %}
+{% endfor %}
+			</select>
+			
+		</div>
+				<div class="search_block_top">
+			<input type="text" name="search" value="" placeholder="{{ text_placeholder }}" class="form-control input-lg" />	
+		</div>
+			<span class="input-group-btn">
+				<button type="button" class="btn btn-default btn-lg"><span class="search_button">{{ text_search }}</span></button>
+			</span>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#search button').on('click', function() {
+        url = $('base').attr('href') + 'index.php?route=product/search';
+        var value = $('#search input[name=\'search\']').val();
+        if (value) {
+            url += '&search=' + encodeURIComponent(value);
+        }
+        var category = $('#search select[name=\'category_id\']').prop('value');
+        if (category>0) {
+            url += '&category_id=' + encodeURIComponent(category);
+        }
+        location = url;
+    });
+    $('#search input[name=\'search\']').on('keydown', function(e) {
+        if (e.keyCode == 13) {
+            $('#search button').trigger('click');
+        }
+    });
+});
+
+// search by category nbsp class remove
+
+function removeclass(){
+
+var options = document.getElementById("searchsort");
+  for (index = 0; index < options.length; ++index) {
+    options[index].innerHTML = options[index].innerHTML.replace(/\&nbsp;/g, '');
+  }
+}
+
+jQuery(document).ready(function() {
+removeclass();
+});
+jQuery(window).resize(
+removeclass
+);
+
+</script>

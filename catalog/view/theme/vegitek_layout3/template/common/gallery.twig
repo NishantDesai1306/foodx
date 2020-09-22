@@ -1,0 +1,109 @@
+
+<div id="information-information" class="container gallery">
+  <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+  </ul>
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+     
+
+    <div id="content" class="{{ class }}">{{ content_top }}{{ gallery_image.img_position }}
+      <h1>{{ title }}</h1>
+      {% for album_image in album_images%}
+          {% if album_image.img_position == 'right' %}
+           {% set position = 'float-right pull-right' %}
+           
+           {% elseif album_image.img_position == 'left' %}
+           {% set position = 'float-left pull-left' %}
+           
+           {% elseif album_image.img_position == 'center' %}
+           {% set position = 'center-block text-center' %}
+           
+           {%endif%}
+		  <div class="row">
+         <div class='col-md-12'>
+            <div class="{{position}}"><img  class="{% if album_image.img_position == 'center' %}center-block text-center  {%endif%} thumbnail" src="{{ album_image.album_image}}"></div>
+            <div  class="desc"><p style="">{{ album_image.album_description }}</p></div>
+		 </div>
+		 </div>
+          {% endfor%}
+     
+    <div class="content">
+         {% for gallery_image in gallery_images %}
+          {% if gallery_image.image_perrow == 2 %}
+         {% set clas = 'col-sm-6 ' %}
+         {% elseif gallery_image.image_perrow == 3 %}
+         {% set clas = 'col-sm-4' %}
+         {% elseif gallery_image.image_perrow == 4 %}
+         {% set clas = 'col-sm-3' %}
+          
+          {% elseif gallery_image.image_perrow == 6 %}
+         {% set clas = 'col-sm-2' %}
+         {% else %}
+          {% set clas = 'col-sm-12' %}
+         {% endif %}
+          
+           {% if gallery_image.popup_type == 2 %}
+              <div class="{{ clas}}" >
+                <div class="thumbnail">
+                 <a class="" href="{{ (gallery_image.popup_resize)?gallery_image.image:gallery_image.pop_image}}" data-lightbox="Gallery-Image"><img src="{{ gallery_image.image}}" class="img-responsive image" >
+                 <div class="middle">
+                    <span class="text glyphicon glyphicon-zoom-in"></span>
+                 </div></a>
+               </div>
+              </div>
+              {% endif %}
+               {% if gallery_image.popup_type == 1 %}
+
+              <div class="{{ clas}}">
+                 <div class="thumbnail">
+                <a class=""  href="{{ (gallery_image.popup_resize)?gallery_image.image:gallery_image.pop_image}}" data-toggle="lightbox" data-gallery="gallery">
+                <img src="{{ gallery_image.image}}" class="img-responsive image img-fluid" >
+                 <div class="middle">
+                    <span class="text glyphicon glyphicon-zoom-in"></span></a>
+                 </div>
+              </div>
+            </div>
+              {% endif %}
+              {% if gallery_image.popup_type == 0 %}
+              <div class="{{ clas }}" >
+                 <div class="thumbnail" id="gallery2" class="gallery2">
+                <a class="test-popup-link" href="{{ (gallery_image.popup_resize)?gallery_image.image:gallery_image.pop_image}}"><img src="{{ gallery_image.image}}"  class="img-responsive image" >
+                <div class="middle">
+                    <span class="text glyphicon glyphicon-zoom-in"></span>
+                 </div></a>
+              </div>
+            </div>
+              {% endif %}
+         {% endfor %}
+         </div>
+       </div>
+    {{ column_right }}</div>
+	
+      {# <div class="col-sm-6 text-left">{{ pagination }}</div> #}
+</div>
+<script>
+$(document).on('click', '[data-toggle="lightbox"]', function(event) {
+                event.preventDefault();
+                $(this).ekkoLightbox();
+            });
+
+</script>
+<script type="text/javascript">
+  $('.test-popup-link').magnificPopup({
+  type: 'image',
+  gallery:{enabled:true}
+  // other options
+});
+
+
+</script>
+

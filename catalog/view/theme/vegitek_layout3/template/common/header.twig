@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="{{ direction }}" lang="{{ lang }}">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>{{ title }}</title>
+<base href="{{ base }}" />
+{% if description %}
+<meta name="description" content="{{ description }}" />
+{% endif %}
+{% if keywords %}
+<meta name="keywords" content="{{ keywords }}" />
+{% endif %}
+<script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js"></script>
+<script src="catalog/view/javascript/bootstrap/js/bootstrap.min.js"></script>
+<link href="catalog/view/javascript/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="https://fonts.googleapis.com/css?family=Rubik:400,500,700&display=swap" rel="stylesheet">
+
+<link href="catalog/view/theme/{{ mytemplate }}/stylesheet/stylesheet.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/{{ mytemplate }}/stylesheet/themetechmount_css/lightbox.css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/magnific/magnific-popup.css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/owl-carousel/owl.carousel.css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/owl-carousel/owl.theme.default.min.css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/{{ mytemplate }}/stylesheet/themetechmount_css/carousel.css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/{{  mytemplate }}/stylesheet/themetechmount_css/custom.css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/{{  mytemplate }}/stylesheet/themetechmount_css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/{{  mytemplate }}/stylesheet/themetechmount_css/animate.css" />
+
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/{{  mytemplate }}/stylesheet/themetechmount_css/blightbox.css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/magnific/magnific-popup.css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/slick/slick.css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/slick/slick-theme.css" />
+			 
+{% if direction == 'rtl' %}
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/{{ mytemplate }}/stylesheet/themetechmount_css/rtl.css">
+{% endif %}
+
+<script src="catalog/view/javascript/lightbox/lightbox-2.6.min.js"></script>
+{% for style in styles %}
+<link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
+{% endfor %}
+{% for script in scripts %}
+<script src="{{ script }}"></script>
+{% endfor %}
+<script src="catalog/view/javascript/common.js" ></script>
+{% for link in links %}
+<link href="{{ link.href }}" rel="{{ link.rel }}" />
+{% endfor %}
+{% for analytic in analytics %}
+{{ analytic }}
+{% endfor %}
+<!-- Themetechmount Start -->
+
+<script  type="text/javascript" src="catalog/view/javascript/themetechmount_js/custom.js"></script>
+<script  type="text/javascript" src="catalog/view/javascript/themetechmount_js/jstree.min.js"></script>
+<script  type="text/javascript" src="catalog/view/javascript/themetechmount_js/jquery.custom.min.js"></script>
+<script  type="text/javascript" src="catalog/view/javascript/themetechmount_js/jquery.formalize.min.js"></script>
+<script  type="text/javascript" src="catalog/view/javascript/themetechmount_js/jquery.elevatezoom.min.js"></script>
+<script  type="text/javascript" src="catalog/view/javascript/themetechmount_js/bootstrap-notify.min.js"></script>  
+<script  type="text/javascript" src="catalog/view/javascript/themetechmount_js/blightbox.js"></script> 
+<script  type="text/javascript" src="catalog/view/javascript/themetechmount_js/imagelightbox.js"></script>
+<script  type="text/javascript" src="catalog/view/javascript/themetechmount_js/jquery.countdown.js"></script>
+<script  type="text/javascript" src="catalog/view/javascript/themetechmount_js/jquery.countdown.min.js"></script>
+<script  type="text/javascript" src="catalog/view/javascript/jquery/magnific/jquery.magnific-popup.min.js"></script>
+<script  type="text/javascript" src="catalog/view/javascript/jquery/owl-carousel/owl.carousel.min.js"></script>
+<script  src="catalog/view/javascript/common.js" ></script>
+<script  src="catalog/view/javascript/themetechmount_js/parallax.js"></script>
+<script  src="catalog/view/javascript/themetechmount_js/animateparallax.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/jquery/slick/slick.js"></script>
+
+              
+
+
+<!-- Themetechmount End -->
+</head>
+
+{% if (column_left and column_right) %}
+{% set layoutclass = 'layout-3' %}
+{% elseif (column_left or column_right) %}
+{% if column_left %}
+{% set layoutclass = 'layout-2 left-col' %}
+{% elseif column_right %}
+{% set layoutclass = 'layout-2 right-col' %}
+{% endif %}
+{% else %}
+{% set layoutclass = 'layout-1' %}
+{% endif %}
+
+<body class="{{ class }} {{ layoutclass }}">
+<section class="site-wrapper">
+
+<header>
+  
+	<!-- top_bar -->
+  <div class="top_bar">
+	<div class="container">
+		
+		   <div class="top_bar_left"> 
+		   		{{ header_top }}
+			</div>
+			<div class="top_bar_right">
+				  <div class="top_link">
+					<a href="{{ contact }}" class="a-top-link contact" title="{{ text_contact }}"><i class="fa fa-map-marker"></i> {{ text_contact }}</a>
+					<a href="{{ checkout }}" class="a-top-link checkout" title="{{ text_checkout }}"><i class="fa fa-check-square"></i> {{ text_checkout }}</a>
+				  </div>
+				  {{ language }} 				
+				  {{ currency }}  
+					
+			</div>
+		
+	   </div>
+	</div>  
+	<!-- top_bar -->
+
+	<!-- header_main -->
+	<div class="header_main">
+		<div class="container">	
+	
+			<div class="header-logo">
+				<div id="logo">{% if logo %}<a href="{{ home }}"><img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive" /></a>{% else %}
+				  <h1><a href="{{ home }}">{{ name }}</a></h1>
+				  {% endif %}
+				</div>
+			</div>
+			
+			<div class="dropdown ttm_search">{{ search }}</div>
+			
+			<div class="header-cart">{{ cart }}</div>
+			
+			 <div class="top_bar_wishlist">
+				<a href="{{ wishlist }}" id="wishlist-total" title="Wishlist"><span class="wishlist">{{ text_wishlist }}</span></a>
+			</div> 
+
+			
+			{{ header_middle }}
+			
+		</div>			
+	  </div>
+	 <!-- header_main end-->
+	 
+	  <!-- bottom_block -->
+	 
+		<div class="bottom_block">
+			<div class="container">
+			
+			<div class="dropdown ttm_myaccount"><a href="{{ account }}" title="{{ text_account_title }}" class="dropdown-toggle" data-toggle="dropdown">
+			<span> {{ text_account_title }}</span> {# <span class="caret"></span></ #}</a>
+			  <ul class="dropdown-menu dropdown-menu-right myaccount-menu">
+				{% if logged %}
+				<li><a href="{{ account }}" title="{{ text_account }}">{{ text_account }}</a></li>
+				<li><a href="{{ order }}" title="{{ text_order }}">{{ text_order }}</a></li>
+				<li><a href="{{ transaction }}" title="{{ text_transaction }}">{{ text_transaction }}</a></li>
+				<li><a href="{{ download }}" title="{{ text_download }}">{{ text_download }}</a></li>
+				<li><a href="{{ logout }}" title="{{ text_logout }}">{{ text_logout }}</a></li>
+				{% else %}
+				<li><a href="{{ register }}" title="{{ text_register }}">{{ text_register }}</a></li>
+				<li><a href="{{ login }}" title="{{ text_login }}">{{ text_login }}</a></li>
+				<li><a href="{{ shopping_cart }}" title="{{ text_shopping_cart }}">{{ text_shopping_cart }}</span></a></li>
+				<li><a href="{{ checkout }}" title="{{ text_checkout }}"><span class="checkout">{{ text_checkout }}</span></a></li>
+				{% endif %}
+				{# <li><a href="{{ wishlist }}" id="wishlist-total" title="{{ text_wishlist }}"><span class="wishlist">{{ text_wishlist }}</span></a></li>
+				<li><a href="{{ compare }}" id="wishlist-total" title="{{ text_compare }}"><span class="compare">{{ text_compare }}</span></a></li> #}
+			  </ul>
+			</div>
+			
+			{{ header_bottom }}
+			
+			{{ menu }}
+
+				
+			</div>
+		</div>
+		
+	<!-- bottom_block end-->
+ 	
+</header>
+
+  <div class="ttm-breadcrumb" id="breadcrumb">
+    <div class="container">
+      
+    </div>
+  </div>
+
+
+<script> 
+
+function quickbox(){
+ if ($(window).width() > 767) {
+    $('.quickview').magnificPopup({
+      type:'iframe',
+      delegate: 'a',
+      preloader: true,
+      tLoading: 'Loading image #%curr%...',
+    });
+ }  
+}
+jQuery(document).ready(function() {quickbox();});
+jQuery(window).resize(function() {quickbox();});
+
+</script>

@@ -1,0 +1,44 @@
+<div class="ttm-category-box">
+<div class="container">
+{# <div class="heading-title">
+	<div class="main-heading">{{ heading_title }}</div>
+</div> #}
+<div class="ttmcat-items">
+{% set sliderFor = 7 %}
+{% set catCount = categories|length %}
+<div id="{% if catCount >= sliderFor %}ttmcat_carousel{% else %}ttmcat-grid{% endif %}" class="category-box {% if catCount >= sliderFor %}ttmcat-carousel{% else %}ttmcatbox-grid{% endif %}">
+  {% for category in categories %}
+  
+	  <div class="{% if catCount >= sliderFor %}ttmcat-slider{% else %}ttmcat-item col-lg-2 col-md-2 col-sm-2 col-xs-4{% endif %}">
+		<div class="content">
+		  <div class="image">
+			<a href="{{ category.href }}">
+				<img src="{{ category.thumb }}" alt="{{ category.name }}" title="{{ category.name }}" class="img-responsive" />
+			</a>
+		  </div>
+		  
+		  <!-- Category Caption Start -->
+		  <div class="caption">
+			<div class="cat-title">
+				<h4><a href="{{ category.href }}">{{ category.name }}</a></h4>
+				{# <span class="desc">{{ category.description [0:30] ~ '...' }}</span> #}
+			</div>
+			{# <div class="cat-sub">
+			  {% if category.children %}
+			  <ul>
+			  {% for child in category.children %}
+			  <li><a href="{{ child.href }}" class="list-group-item">{{ child.name }}</a></li>
+			  {% endfor %}
+			  </ul>
+			  {% endif %}
+		   </div> #}
+		  </div> 
+		  <!-- Category Caption END -->
+		  
+		</div>
+	  </div>
+  {% endfor %}
+</div>
+</div>
+</div>
+</div>

@@ -1,0 +1,55 @@
+<div class="vertical-menu">
+    <div class="vertical-category">
+        <div class="vertical-menu-heading"><span class="menu-icon">&nbsp;</span> <span class="vertical-heading-text">{{ verticalmenu_heading_title }} <i class="fa fa-angle-down"></i>  </span>
+        </div>
+        <div class="vertical-content">
+            <ul id="nav-one" class="dropmenu top-vertical-category">
+                {% for category in categories %} {% if category.children %}
+                <li class="menu_item dropdown"><a href="{{ category.href }}">{{ category.name }}</a>
+
+                    <div class="dropdown-menu megamenu column{{ category.column }}">
+                        <div class="dropdown-inner">
+                            {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
+                            <ul class="subchilds_1 list-unstyled">
+                                {% for child in children %} {% if child.subchilds %}
+                                <li class="dropdown"><a href="{{ child.href }}">{{ child.name }}</a>
+
+                                    <div class="dropdown-menu">
+                                        <div class="dropdown-inner">
+                                            {% for childs_col in child.subchilds|batch(child.subchilds|length / child.column|round(1, 'ceil')) %}
+                                            <ul class="subchild list-unstyled">
+                                                {% for subchild in childs_col %}
+                                                <li class="subchild-inner"><a href="{{ subchild.href }}">{{ subchild.name }}</a></li>
+                                                {% endfor %}
+                                            </ul>
+                                            {% endfor %}
+                                        </div>
+										
+				
+                                    </div>
+
+                                </li>
+                                {% else %}
+                                <li><a href="{{ child.href }}">{{ child.name }}</a></li>
+                                {% endif %} {% endfor %}
+
+                            </ul>
+                            {% endfor %}
+							{% if thumb %}
+								<div class="menucategory-image">
+									<a class="a-top-link" href="{{ category.href }}"><img src="image/{{ category.rsimage }}" /></a>
+								</div>
+							{% endif %}
+                        </div>
+						
+                    </div>
+
+                </li>
+                {% else %}
+                <li class="menu_item"><a href="{{ category.href }}">{{ category.name }}</a></li>
+                {% endif %} {% endfor %}
+                <li class="menu_item"> <a href="{{ blogs }}">{{ text_blog }}</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

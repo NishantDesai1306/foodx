@@ -1,0 +1,75 @@
+<div id="ttm-home-blog">
+
+<div class="container">
+<div class="heading-title">
+ <div class="main-heading">{{ heading_title }}</div>
+ </div>
+ 
+<div class="ttm-blog-section blog">
+<div class="box">
+	{% set sliderFor = 3 %}
+	{% set blogCount = blogs|length %}
+	
+<div class="ttm-content-box">
+ {% if blogs %}
+    <div class="ttm-product-box {% if blogCount >= sliderFor %} blog_post_layout blog-carousel{% else %} box-grid{% endif %}" id="{% if blogCount >= sliderFor %}blog-carousel{% else %}blog-grid{% endif %}">
+    {% for blog in blogs %} 
+    <div class="{% if blogCount >= sliderFor %}ttm_blog_item{% else %}product-items{% endif %}">
+
+     <div class="ttm-post-outer">
+	 {% if blog.image %} 
+	  <div class="ttm-post-imagebox">
+	  
+	  <div class="image">
+	  <img src="{{ blog.image }}" alt="{{ heading_title }}" title="{{ heading_title }}" class="img-thumbnail" />
+      <p class="post_hover"><a class="icon zoom" title="Click to view Full Image " href="{{ blog.image }}" data-lightbox="example-set"><i class="fa fa-search"></i></a></p>
+	  </div>
+	  
+	  </div>
+	 {% endif %} 	
+	 <div class="ttm-post-content"> 
+		
+		<div class="blog_stats">
+			<div class="view-blog">	
+								
+				<div class="author"><a href="{{ blog.href }}">{% if blog.author %} <i class="fa fa-user"></i> {{ blog.author }} {% else %} <i class="fa fa-user"></i> {{ text_author }} {% endif %}</a></div>
+								
+				<div class="blog-time">
+				    <div class="date-time"> <i class="fa fa-calendar"></i> {{ blog.date_added }} </div>
+			    </div>
+				
+				<div class="write-comment"><a href="{{ blog.href }}"><i class="fa fa-comment"></i> {{ blog.total_comments }} {# {{ entry_comment }} #}</a> </div>
+	
+			</div> 
+		</div>
+		
+		<h2 class="blog_title"><a href="{{ blog.href }}" title="{{ blog.title }}">{{ blog.title | slice(0, 35) ~ '...'}}</a> </h2>
+			
+		<div class="desc"> <p> {{ blog.description }}  </p></div>
+		
+		<div class="readmore"><p class="btn_readmore"> <a href="{{ blog.href }}"> {{ text_read_more }} </a> <i class="fa fa-arrow-right"></i></p></div>
+
+				
+	 </div> 
+	 
+    </div>
+	
+	</div>
+	
+     {% endfor %} 	 
+   
+  </div>
+  {% endif %} 
+   <!--<div class="buttons text-center">
+      <button type="button" onclick="location='{{ all_blogs }} ';" class="btn btn-primary">{{ button_all_blogs }}</button>
+    </div>-->
+  </div>
+
+
+
+
+</div> 
+</div>
+</div>
+
+</div>

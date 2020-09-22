@@ -1,0 +1,67 @@
+{{ header }}
+<div id="ttmgallery-information" class="container gallery">
+  <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+  </ul>
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+     
+
+    <div id="content" class="{{ class }}">{{ content_top }}{{ gallery_image.img_position }}
+
+      {% for album_image in album_images%}
+          <h2 class="page-title">{{ album_image.title }}</h2>
+		  <div class="row">
+         <div class='col-md-12'>
+            <div class="ttmgallery-image gallery-thumbnail"><img  class="{% if album_image.img_position == 'center' %}center-block text-center  {%endif%} gallery-thumbnail" src="{{ album_image.album_image}}"></div>
+            <div class="ttmgallery-desc"><p style="">{{ album_image.album_description }}</p></div>
+		 </div>
+		 </div>
+          {% endfor%}
+     
+    <div class="ttmgallery-content row">
+         {% for gallery_image in gallery_images %}
+          {% if gallery_image.image_perrow == 2 %}
+         {% set clas = 'col-xs-6 ' %}
+         {% elseif gallery_image.image_perrow == 3 %}
+         {% set clas = 'col-xs-4' %}
+         {% elseif gallery_image.image_perrow == 4 %}
+         {% set clas = 'col-xs-3' %}
+          
+          {% elseif gallery_image.image_perrow == 6 %}
+         {% set clas = 'col-xs-2' %}
+         {% else %}
+          {% set clas = 'col-xs-12' %}
+         {% endif %}
+          
+          
+              <div class="{{ clas}} ttmgallery">
+                <div class="gallery-thumbnail image">
+                 <a class="gallery-image" href="{{ gallery_image.image}}" data-lightbox="Gallery-Image"><img src="{{ gallery_image.image}}" class="img-responsive image" >
+				 </a>
+				 
+				 <p class="post_hover"><a class="icon zoom" title="Click to view Full Image " href="{{ gallery_image.pop_image}}" data-lightbox="example-set"><i class="fa fa-search"></i></a></p>
+				 
+				 
+               </div>
+              </div>
+              
+              
+         {% endfor %}
+         </div>
+       </div>
+    {{ column_right }}</div>
+	
+      {# <div class="col-sm-6 text-left">{{ pagination }}</div> #}
+</div>
+
+
+{{ footer }}

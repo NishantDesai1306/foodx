@@ -1,0 +1,76 @@
+<div class="sidelatest box sideproducts">
+   <div class="container">
+      <div class="heading-title">
+         <div class="sidebar-heading">{{ heading_title }}</div>
+      </div>
+      <div class="ttm-content-box">
+         <div class="latest-products sidebar-products">
+            {% set sliderFor = 4 %}
+            {% set productCount = products|length %}
+            <div class="ttm-product-box {% if productCount >= sliderFor %} sideproduct_carousel {% else %}productbox-grid{% endif %}" id="{% if productCount >= sliderFor %}latest-carousel{% else %}latest-grid{% endif %}">
+               {% for row in products|batch(3, 'No item') %}
+               <div class="{% if productCount >= sliderFor %}product-slider{% else %}product-items col-lg-3 col-md-3 col-sm-4 col-xs-6{% endif %}">
+                  {% for product in row %}
+                  <div class="product-wrapper">
+                     <div class="product-block product-thumb">
+                        <div class="product-thumb-inner">
+                           <div class="image">
+                              {% if product.thumb_swap %}
+                              <a href="{{ product.href }}">
+                              <img src="{{ product.thumb }}" title="{{ product.name }}" alt="{{ product.name }}" class="img-responsive reg-image"/>
+                              <img class="img-responsive hover-image" src="{{ product.thumb_swap }}" title="{{ product.name }}" alt="{{ product.name }}"/>
+                              </a>
+                              {% else %}
+                              <a href="{{ product.href }}">
+                              <img src="{{ product.thumb }}" title="{{ product.name }}" alt="{{ product.name }}" class="img-responsive"/></a>
+                              {% endif %}
+                              {% if not product.special %}        
+                              {% else %}
+                              <div class="saleback">
+                                 <span class="saleicon sale">{{ text_sale }}</span>         
+                              </div>
+                              {% endif %}
+                           </div>
+                           <div class="caption">
+                              {# 
+                              <p class="desc"><?php echo $product['description']; ?></p>
+                              #}
+                              <h4><a href="{{ product.href }} ">{{ product.name }} </a></h4>
+                              {# if product.rating #}
+                              <div class="rating">
+                                 {% for i in 1..5 %}
+                                 {% if product.rating < i %}
+                                 <span class="fa fa-stack"><i class="fa fa-star off fa-stack-2x"></i></span>
+                                 {% else %}
+                                 <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                 {% endif %}
+                                 {% endfor %}
+                              </div>
+                              {# endif #}
+                              {% if product.price %}
+                              <p class="price">
+                                 {% if not product.special %}
+                                 {{ product.price }}
+                                 {% else %}
+                                 <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+                                 {% endif %}
+                                 {% if product.tax %}
+                                 <span class="price-tax">{{ text_tax }} {{ product.tax }}</span>
+                                 {% endif %}
+                                 {% if product.special %}
+                                 <span class="percentsaving">{{ product.percentsaving }}%</span>
+                                 {% endif %}
+                              </p>
+                              {% endif %}
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  {% endfor %}
+               </div>
+               {% endfor %}
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,102 @@
+<div class="bestseller box product-box">
+   <div class="container">
+   	  <div class="heading-title">
+         <div class="main-heading">{{ heading_title }}</div>
+		
+      </div>
+      <div class="ttm-content-box">
+         <div class="bestsellers home-products">
+            {% set sliderFor = 5 %}
+            {% set productCount = products|length %}
+            <div class="ttm-product-box {% if productCount >= sliderFor %}product_carousel {% else %}productbox-grid{% endif %}" id="{% if productCount >= sliderFor %}bestseller-carousel{% else %}bestseller-grid{% endif %}">
+               {% for product in products %}
+               <div class="{% if productCount >= sliderFor %}product-slider{% else %}product-items col-lg-3 col-md-4 col-sm-4 col-xs-6{% endif %}">
+                 
+                     <div class="product-block product-thumb">
+                        <div class="product-thumb-inner">
+                           <div class="image">
+                              {% if product.thumb_swap %}
+                              <a href="{{ product.href }}">
+                              <img src="{{ product.thumb }}" title="{{ product.name }}" alt="{{ product.name }}" class="img-responsive reg-image"/>
+                              <img class="img-responsive hover-image" src="{{ product.thumb_swap }}" title="{{ product.name }}" alt="{{ product.name }}"/>
+                              </a>
+                              {% else %}
+                              <a href="{{ product.href }}">
+                              <img src="{{ product.thumb }}" title="{{ product.name }}" alt="{{ product.name }}" class="img-responsive"/></a>
+                              {% endif %}
+                              {% if not product.special %}        
+                              {% else %}
+                              <div class="saleback">
+                                 <span class="saleicon sale">{{ text_sale }}</span>         
+                              </div>
+                              {% endif %}
+							  {% if product.is_new %}
+							<div class="label_new"><span>{{ text_new }}</span></div>
+						   {% endif %}
+						   
+						   
+							  
+                              <div class="button-group">
+							  
+								<button type="button" data-toggle="tooltip" data-placement="top" class="addtocart{% if product.product_quantity<=0 %} {{ "disabled" }} {% endif %}" title="{% if product.product_quantity <=0 %}{{ product.product_stock }}{% else %}{{ button_cart }}{% endif %}" onclick="{% if product.product_quantity <=0 %}{% else %}cart.add('{{ product.product_id }}');('{{ product.product_id }}'){% endif %}"{% if product.product_quantity <=0 %}{{ "" }} {% endif %}>
+								{% if product.product_quantity <=0 %}
+								{{ "<span class=\"outofstock\">"~product.product_stock }}
+								{% else %} 
+								{{ "<span class=\"hidden-xs hidden-sm hidden-md\">"~button_cart }}
+								{% endif %}
+								</span></button>
+                                 <div class="quickview" data-toggle="tooltip"  data-placement="top" title="{{ button_quickview }}" ><a href="{{ product.quick }}">{{ button_quickview }}</a></div>
+                                 <button class="wishlist" data-toggle="tooltip" data-placement="top" type="button" title="{{ button_wishlist }} " onclick="wishlist.add('{{ product.product_id }} ');"></button>
+                                 <button class="compare" data-toggle="tooltip" type="button" data-placement="top" title="{{ button_compare }} " onclick="compare.add('{{ product.product_id }} ');"></button>
+								 
+                              </div>
+                           </div>
+                           <div class="caption">
+						    {# <div class="ttmprogressbar">
+								<span id="QuantityAvailable">{% if product.product_quantity <=0 %}{{product_unavailable}}:{% else %}{{product_available}}:{% endif %}</span>
+								<span id="quantity" name="quantity">{{product.product_quantity}}</span>
+								<div class="progress">
+									<div class="progress-bar" role="progressbar"></div>
+								</div>
+							</div>  #}
+							
+							  {# <p class="description">{{ product.description [0:30] ~ '...' }} </p> #}
+							  
+                              <h4><a href="{{ product.href }} ">{{ product.name }} </a></h4>
+                              	
+								 <div class="rating">
+                                 {% for i in 1..5 %}
+                                 {% if product.rating < i %}
+                                 <span class="fa fa-stack"><i class="fa fa-star off fa-stack-2x"></i></span>
+                                 {% else %}
+                                 <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                 {% endif %}
+                                 {% endfor %}
+                              </div>
+							  
+                              {% if product.price %}
+                              <p class="price">
+                                 {% if not product.special %}
+                                 {{ product.price }}
+                                 {% else %}
+                                 <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+                                 {% endif %}
+                                 {% if product.tax %}
+                                 <span class="price-tax">{{ text_tax }} {{ product.tax }}</span>
+                                 {% endif %}
+                                 {% if product.special %}
+                                 <span class="percentsaving">{{ product.percentsaving }}% </span>
+                                 {% endif %}
+                              </p>
+                              {% endif %}
+                           </div>
+                        </div>
+                     </div>
+					   
+               </div>
+               {% endfor %}
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

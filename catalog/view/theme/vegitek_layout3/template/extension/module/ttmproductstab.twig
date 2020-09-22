@@ -1,0 +1,395 @@
+<div id="ttm_products_tab" class="ttm_products_tab box">
+
+   <div class="container">
+      
+      <div class="ttm_products_tabs tabs row">
+         <div class="tabs-style col-lg-12 col-md-12">
+		   <div class="heading-title">
+			  <div class="main-heading">{{ heading_title }}</div>
+			 {#  <div class="main-heading-text">{{ heading_text }}</div> #}
+		   </div>
+            <ul class="nav nav-tabs">
+               {% if featured_products_status %}
+               <li class="active"><a href="#tab-featuredproduct-{{ module }}" data-toggle="tab" >{{ tab_featured }}</a></li>
+               {% endif %}
+               {% if latest_products_status %}
+               <li><a href="#tab-latestproduct-{{ module }}" data-toggle="tab" >{{ tab_latest }}</a></li>
+               {% endif %}
+               {% if bestseller_products_status %}
+               <li><a href="#tab-topsellingproducts-{{ module }}" data-toggle="tab" >{{ tab_bestseller }}</a></li>
+               {% endif %}
+               {% if special_products_status %}
+               <li><a href="#tab-specialproduct-{{ module }}" data-toggle="tab" >{{ tab_special }}</a></li>
+               {% endif %}
+            </ul>
+         </div>
+         <div class="tab-content col-lg-12 col-md-12">
+            {# Featured Products #}
+            {% if featured_products_status %}
+            <div id="tab-featuredproduct-{{ module }}" class="featured-products home-products active">
+               {% set sliderFor = 9 %}
+               {% set productCount = featured_products|length %}
+               <div class="ttm-product-box {% if productCount >= sliderFor %}producttab_carousel {% else %}productbox-grid{% endif %}" id="{% if productCount >= sliderFor %}featured-carousel{% else %}featured-grid{% endif %}">
+                   {% for row in featured_products|batch(2, 'No item') %}
+                  <div class="{% if productCount >= sliderFor %}product-slider{% else %}product-items col-lg-3 col-md-4 col-sm-4 col-xs-6{% endif %}">
+                   {% for product in row %}
+				 <div class="product-wrapper">
+                        <div class="product-block product-thumb">
+                           <div class="product-thumb-inner">
+                              <div class="image">
+                                 {% if product.thumb_swap %}
+                                 <a href="{{ product.href }}">
+                                 <img src="{{ product.thumb }}" title="{{ product.name }}" alt="{{ product.name }}" class="img-responsive reg-image"/>
+                                 <img class="img-responsive hover-image" src="{{ product.thumb_swap }}" title="{{ product.name }}" alt="{{ product.name }}"/>
+                                 </a>
+                                 {% else %}
+                                 <a href="{{ product.href }}">
+                                 <img src="{{ product.thumb }}" title="{{ product.name }}" alt="{{ product.name }}" class="img-responsive"/></a>
+                                 {% endif %}
+                                 {% if not product.special %}        
+                                 {% else %}
+                                 <div class="saleback">
+                                    <span class="saleicon sale">{{ text_sale }}</span>         
+                                 </div>
+                                 {% endif %}
+								 {% if product.is_new %}
+							          <div class="label_new"><span>{{ text_new }}</span></div>
+						            {% endif %}
+								
+                                <div class="button-group">
+                                    <button type="button" data-toggle="tooltip" data-placement="top" class="addtocart{% if product.product_quantity<=0 %} {{ "disabled" }} {% endif %}" title="{% if product.product_quantity <=0 %}{{ product.product_stock }}{% else %}{{ button_cart }}{% endif %}" onclick="{% if product.product_quantity <=0 %}{% else %}cart.add('{{ product.product_id }}');('{{ product.product_id }}'){% endif %}"{% if product.product_quantity <=0 %}{{ "" }} {% endif %}>
+								{% if product.product_quantity <=0 %}
+								{{ "<span class=\"outofstock\">"~product.product_stock }}
+								{% else %} 
+								{{ "<span class=\"hidden-xs hidden-sm hidden-md\">"~button_cart }}
+								{% endif %}
+								</span></button>
+                                 <div class="quickview" data-toggle="tooltip"  data-placement="top" title="{{ button_quickview }}" ><a href="{{ product.quick }}">{{ button_quickview }}</a></div>
+                                 <button class="wishlist" data-toggle="tooltip" data-placement="top" type="button" title="{{ button_wishlist }} " onclick="wishlist.add('{{ product.product_id }} ');"></button>
+                                 <button class="compare" data-toggle="tooltip" type="button" data-placement="top" title="{{ button_compare }} " onclick="compare.add('{{ product.product_id }} ');"></button>
+                                 </div>
+                              </div>
+                              <div class="caption">
+							  {# <div class="ttmprogressbar">
+								<span id="QuantityAvailable">{% if product.product_quantity <=0 %}{{product_unavailable}}:{% else %}{{product_available}}:{% endif %}</span>
+								<span id="quantity" name="quantity">{{product.product_quantity}}</span>
+								<div class="progress">
+									<div class="progress-bar" role="progressbar"></div>
+								</div>
+							</div> #}
+                                 {# <p class="description">{{ product.description [0:30] ~ '...' }} </p> #}
+								 
+                                 <h4><a href="{{ product.href }} ">{{ product.name }} </a></h4>
+                                
+								
+                                 <div class="rating">
+                                    {% for i in 1..5 %}
+                                    {% if product.rating < i %}
+                                    <span class="fa fa-stack"><i class="fa fa-star off fa-stack-2x"></i></span>
+                                    {% else %}
+                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                    {% endif %}
+                                    {% endfor %}
+                                 </div>
+                                
+								
+                                 {% if product.price %}
+                                 <p class="price">
+                                    {% if not product.special %}
+                                    {{ product.price }}
+                                    {% else %}
+                                    <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+                                    {% endif %}
+                                    {% if product.tax %}
+                                    <span class="price-tax">{{ text_tax }} {{ product.tax }}</span>
+                                    {% endif %}
+                                    {% if product.special %}
+                                    <span class="percentsaving">{{ product.percentsaving }}% </span>
+                                    {% endif %}
+                                 </p>
+                                 {% endif %}
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+               {% endfor %}
+                  </div>
+                  {% endfor %}
+               </div>
+            </div>
+            {% endif %}
+            {# Featured Products #}
+			
+            {# Latest Products #}
+            {% if latest_products_status %}
+            <div id="tab-latestproduct-{{ module }}" class="latest-products home-products">
+               {% set sliderFor = 9 %}
+               {% set productCount = latest_products|length %}
+               <div class="ttm-product-box {% if productCount >= sliderFor %} producttab_carousel {% else %}productbox-grid{% endif %}" id="{% if productCount >= sliderFor %}latest-carousel{% else %}latest-grid{% endif %}">
+                  
+				  {% for row in latest_products|batch(2, 'No item') %}
+                  <div class="{% if productCount >= sliderFor %}product-slider{% else %}product-items col-lg-3 col-md-4 col-sm-4 col-xs-6{% endif %}">
+                     {% for product in row %}
+				 <div class="product-wrapper">
+                        <div class="product-block product-thumb">
+                           <div class="product-thumb-inner">
+                              <div class="image">
+                                 {% if product.thumb_swap %}
+                                 <a href="{{ product.href }}">
+                                 <img src="{{ product.thumb }}" title="{{ product.name }}" alt="{{ product.name }}" class="img-responsive reg-image"/>
+                                 <img class="img-responsive hover-image" src="{{ product.thumb_swap }}" title="{{ product.name }}" alt="{{ product.name }}"/>
+                                 </a>
+                                 {% else %}
+                                 <a href="{{ product.href }}">
+                                 <img src="{{ product.thumb }}" title="{{ product.name }}" alt="{{ product.name }}" class="img-responsive"/></a>
+                                 {% endif %}
+								 
+                                 {% if not product.special %}        
+                                 {% else %}
+                                 <div class="saleback">
+                                    <span class="saleicon sale">{{ text_sale }}</span>         
+                                 </div>
+								  
+                                 {% endif %}
+								 {% if product.is_new %}
+							          <div class="label_new"><span>{{ text_new }}</span></div>
+						            {% endif %}
+                                 <div class="button-group">
+                                    <button type="button" data-toggle="tooltip" data-placement="top" class="addtocart{% if product.product_quantity<=0 %} {{ "disabled" }} {% endif %}" title="{% if product.product_quantity <=0 %}{{ product.product_stock }}{% else %}{{ button_cart }}{% endif %}" onclick="{% if product.product_quantity <=0 %}{% else %}cart.add('{{ product.product_id }}');('{{ product.product_id }}'){% endif %}"{% if product.product_quantity <=0 %}{{ "" }} {% endif %}>
+									{% if product.product_quantity <=0 %}
+									{{ "<span class=\"outofstock\">"~product.product_stock }}
+									{% else %} 
+									{{ "<span class=\"hidden-xs hidden-sm hidden-md\">"~button_cart }}
+									{% endif %}
+									</span></button>
+									<div class="quickview" data-toggle="tooltip"  data-placement="top" title="{{ button_quickview }}" ><a href="{{ product.quick }}">{{ button_quickview }}</a></div>
+									<button class="wishlist" data-toggle="tooltip" data-placement="top" type="button" title="{{ button_wishlist }} " onclick="wishlist.add('{{ product.product_id }} ');"></button>
+									<button class="compare" data-toggle="tooltip" type="button" data-placement="top" title="{{ button_compare }} " onclick="compare.add('{{ product.product_id }} ');"></button>
+                                 </div>
+								 
+                              </div>
+                              <div class="caption">
+                                 {# <p class="description">{{ product.description [0:30] ~ '...' }} </p> #}
+								 
+                                 <h4><a href="{{ product.href }} ">{{ product.name }} </a></h4>
+									
+									
+								  <div class="rating">
+                                    {% for i in 1..5 %}
+                                    {% if product.rating < i %}
+                                    <span class="fa fa-stack"><i class="fa fa-star off fa-stack-2x"></i></span>
+                                    {% else %}
+                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                    {% endif %}
+                                    {% endfor %}
+                                 </div>
+								 
+								 
+                                 {% if product.price %}
+                                 <p class="price">
+                                    {% if not product.special %}
+                                    {{ product.price }}
+                                    {% else %}
+                                    <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+                                    {% endif %}
+                                    {% if product.tax %}
+                                    <span class="price-tax">{{ text_tax }} {{ product.tax }}</span>
+                                    {% endif %}
+                                    {% if product.special %}
+                                    <span class="percentsaving">{{ product.percentsaving }}%</span>
+                                    {% endif %}
+                                 </p>
+                                 {% endif %}
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+               {% endfor %}
+                  </div>
+                  {% endfor %}
+               </div>
+            </div>
+            {% endif %}
+            {# Latest Products #}	
+			
+            {# Bestseller Products #}
+            {% if bestseller_products_status %}
+            <div id="tab-topsellingproducts-{{ module }}" class="bestsellers home-products">
+               {% set sliderFor = 9 %}
+               {% set productCount = bestseller_products|length %}
+               <div class="ttm-product-box {% if productCount >= sliderFor %}producttab_carousel {% else %}productbox-grid{% endif %}" id="{% if productCount >= sliderFor %}bestseller-carousel{% else %}bestseller-grid{% endif %}">
+				  {% for row in bestseller_products|batch(2, 'No item') %}
+                  <div class="{% if productCount >= sliderFor %}product-slider{% else %}product-items col-lg-3 col-md-4 col-sm-4 col-xs-1{% endif %}">
+                     {% for product in row %}
+				 <div class="product-wrapper">
+                        <div class="product-block product-thumb">
+                           <div class="product-thumb-inner">
+                              <div class="image">
+                                 {% if product.thumb_swap %}
+                                 <a href="{{ product.href }}">
+                                 <img src="{{ product.thumb }}" title="{{ product.name }}" alt="{{ product.name }}" class="img-responsive reg-image"/>
+                                 <img class="img-responsive hover-image" src="{{ product.thumb_swap }}" title="{{ product.name }}" alt="{{ product.name }}"/>
+                                 </a>
+                                 {% else %}
+                                 <a href="{{ product.href }}">
+                                 <img src="{{ product.thumb }}" title="{{ product.name }}" alt="{{ product.name }}" class="img-responsive"/></a>
+                                 {% endif %}
+                                 {% if not product.special %}        
+                                 {% else %}
+                                 <div class="saleback">
+                                    <span class="saleicon sale">{{ text_sale }}</span>         
+                                 </div>
+                                 {% endif %}
+								 {% if product.is_new %}
+							          <div class="label_new"><span>{{ text_new }}</span></div>
+						            {% endif %}
+                                 <div class="button-group">
+                                    <button type="button" data-toggle="tooltip" data-placement="top" class="addtocart{% if product.product_quantity<=0 %} {{ "disabled" }} {% endif %}" title="{% if product.product_quantity <=0 %}{{ product.product_stock }}{% else %}{{ button_cart }}{% endif %}" onclick="{% if product.product_quantity <=0 %}{% else %}cart.add('{{ product.product_id }}');('{{ product.product_id }}'){% endif %}"{% if product.product_quantity <=0 %}{{ "" }} {% endif %}>
+								{% if product.product_quantity <=0 %}
+								{{ "<span class=\"outofstock\">"~product.product_stock }}
+								{% else %} 
+								{{ "<span class=\"hidden-xs hidden-sm hidden-md\">"~button_cart }}
+								{% endif %}
+								</span></button>
+                                 <div class="quickview" data-toggle="tooltip"  data-placement="top" title="{{ button_quickview }}" ><a href="{{ product.quick }}">{{ button_quickview }}</a></div>
+                                 <button class="wishlist" data-toggle="tooltip" data-placement="top" type="button" title="{{ button_wishlist }} " onclick="wishlist.add('{{ product.product_id }} ');"></button>
+                                 <button class="compare" data-toggle="tooltip" type="button" data-placement="top" title="{{ button_compare }} " onclick="compare.add('{{ product.product_id }} ');"></button>
+                                 </div>
+								 
+                              </div>
+                              <div class="caption">
+							     {# <p class="description">{{ product.description [0:30] ~ '...' }} </p> #}
+							  
+                                 <h4><a href="{{ product.href }} ">{{ product.name }} </a></h4>
+								
+                                 <div class="rating">
+                                    {% for i in 1..5 %}
+                                    {% if product.rating < i %}
+                                    <span class="fa fa-stack"><i class="fa fa-star off fa-stack-2x"></i></span>
+                                    {% else %}
+                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                    {% endif %}
+                                    {% endfor %}
+                                 </div>
+								 
+                                 {% if product.price %}
+                                 <p class="price">
+                                    {% if not product.special %}
+                                    {{ product.price }}
+                                    {% else %}
+                                    <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+                                    {% endif %}
+                                    {% if product.tax %}
+                                    <span class="price-tax">{{ text_tax }} {{ product.tax }}</span>
+                                    {% endif %}
+                                    {% if product.special %}
+                                    <span class="percentsaving">{{ product.percentsaving }}% </span>
+                                    {% endif %}
+                                 </p>
+                                 {% endif %}
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  {% endfor %}
+                  </div>
+                  {% endfor %}
+               </div>
+            </div>
+            {% endif %}
+            {# Bestseller Products #}
+			
+            {# Special Products #}
+            {% if special_products_status %}
+            <div id="tab-specialproduct-{{ module }}" class="special-products home-products">
+               {% set sliderFor = 9 %}
+               {% set productCount = special_products|length %}
+               <div class="ttm-product-box {% if productCount >= sliderFor %}producttab_carousel {% else %}productbox-grid{% endif %}" id="{% if productCount >= sliderFor %}special-carousel{% else %}special-grid{% endif %}">
+                 
+				  {% for row in special_products|batch(2, 'No item') %}
+                  <div class="{% if productCount >= sliderFor %}product-slider{% else %}product-items col-lg-3 col-md-4 col-sm-4 col-xs-6{% endif %}">
+                    {% for product in row %}
+				 <div class="product-wrapper">
+                        <div class="product-block product-thumb">
+                           <div class="product-thumb-inner">
+                              <div class="image">
+                                 {% if product.thumb_swap %}
+                                 <a href="{{ product.href }}">
+                                 <img src="{{ product.thumb }}" title="{{ product.name }}" alt="{{ product.name }}" class="img-responsive reg-image"/>
+                                 <img class="img-responsive hover-image" src="{{ product.thumb_swap }}" title="{{ product.name }}" alt="{{ product.name }}"/>
+                                 </a>
+                                 {% else %}
+                                 <a href="{{ product.href }}">
+                                 <img src="{{ product.thumb }}" title="{{ product.name }}" alt="{{ product.name }}" class="img-responsive"/></a>
+                                 {% endif %}
+                                 {% if not product.special %}        
+                                 {% else %}
+                                 <div class="saleback">
+                                    <span class="saleicon sale">{{ text_sale }}</span>         
+                                 </div>
+                                 {% endif %}
+								 {% if product.is_new %}
+							          <div class="label_new"><span>{{ text_new }}</span></div>
+						            {% endif %}
+                                 <div class="button-group">
+                                    <button type="button" data-toggle="tooltip" data-placement="top" class="addtocart{% if product.product_quantity<=0 %} {{ "disabled" }} {% endif %}" title="{% if product.product_quantity <=0 %}{{ product.product_stock }}{% else %}{{ button_cart }}{% endif %}" onclick="{% if product.product_quantity <=0 %}{% else %}cart.add('{{ product.product_id }}');('{{ product.product_id }}'){% endif %}"{% if product.product_quantity <=0 %}{{ "" }} {% endif %}>
+								{% if product.product_quantity <=0 %}
+								{{ "<span class=\"outofstock\">"~product.product_stock }}
+								{% else %} 
+								{{ "<span class=\"hidden-xs hidden-sm hidden-md\">"~button_cart }}
+								{% endif %}
+								</span></button>
+                                 <div class="quickview" data-toggle="tooltip"  data-placement="top" title="{{ button_quickview }}" ><a href="{{ product.quick }}">{{ button_quickview }}</a></div>
+                                 <button class="wishlist" data-toggle="tooltip" data-placement="top" type="button" title="{{ button_wishlist }} " onclick="wishlist.add('{{ product.product_id }} ');"></button>
+                                 <button class="compare" data-toggle="tooltip" type="button" data-placement="top" title="{{ button_compare }} " onclick="compare.add('{{ product.product_id }} ');"></button>
+                                 </div>
+								
+								 
+                              </div>
+                              <div class="caption">
+                                 {# <p class="description">{{ product.description [0:30] ~ '...' }} </p> #}
+								 
+                                 <h4><a href="{{ product.href }} ">{{ product.name }} </a></h4>                           
+                                 
+								  
+								 <div class="rating">
+                                    {% for i in 1..5 %}
+                                    {% if product.rating < i %}
+                                    <span class="fa fa-stack"><i class="fa fa-star off fa-stack-2x"></i></span>
+                                    {% else %}
+                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                    {% endif %}
+                                    {% endfor %}
+                                 </div>
+								 
+                                 {% if product.price %}
+                                 <p class="price">
+                                    {% if not product.special %}
+                                    {{ product.price }}
+                                    {% else %}
+                                    <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+                                    {% endif %}
+                                    {% if product.tax %}
+                                    <span class="price-tax">{{ text_tax }} {{ product.tax }}</span>
+                                    {% endif %}
+                                    {% if product.special %}
+                                    <span class="percentsaving">{{ product.percentsaving }}%</span>
+                                    {% endif %}
+                                 </p>
+                                 {% endif %}
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  {% endfor %}
+                  </div>
+                  {% endfor %}
+               </div>
+            </div>
+            {% endif %}
+            {# Special Products #}
+         </div>
+      </div>
+   </div>
+
+</div>
