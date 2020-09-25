@@ -1,10 +1,10 @@
 <?php
 // Text
-$_['text_information']  = 'Information';
+$_['text_information']  = 'Company';
 $_['text_service']      = 'Customer Service';
-$_['text_extra']        = 'Our policy';
+$_['text_extra']        = 'Support';
 $_['text_myaccount']    = 'My account';
-$_['text_contact']      = 'Contact Us';
+$_['text_contact']      = 'Our Values';
 $_['text_return']       = 'Returns';
 $_['text_sitemap']      = 'Site Map';
 $_['text_manufacturer'] = 'Brands';

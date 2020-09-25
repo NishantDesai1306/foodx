@@ -1,4 +1,48 @@
 <div class="ttm-category-box">
+	<ul class="hpns_ordering_steps container_16">
+		<li>
+			<a href="../catalogue/signup.cfm" class="hpns_ordering_steps_1">
+				<div class="hpns_ordering_steps_11">
+					<div class="hpns_ordering_steps_111"><img src="http://localhost/foodx-oc/image/catalog/hpns_Icons_signup.svg" alt="" class="hpns_ordering_steps_1111"></div>
+					<div class="hpns_ordering_steps_112">
+						<div class="hpns_ordering_steps_1121">Sign up and pick your default day</div>
+						<div class="hpns_ordering_steps_1122">Free Delivery on orders over
+							$125</div>
+					</div>
+				</div>
+			</a>
+		</li>
+		<li>
+
+			<a href="../catalogue/catalogue.cfm" class="hpns_ordering_steps_1">
+				<div class="hpns_ordering_steps_11">
+					<div class="hpns_ordering_steps_111"><img src="http://localhost/foodx-oc/image/catalog/hpns_Icons_cart.svg" alt="" class="hpns_ordering_steps_1111"></div>
+					<div class="hpns_ordering_steps_112">
+						<div class="hpns_ordering_steps_1121">Browse &amp; shop</div>
+						<div class="hpns_ordering_steps_1122">Confirm your order by 8 PM the day before delivery</div>
+					</div>
+				</div>
+			</a>
+		</li>
+		<li>
+			<a href="../catalogue/deliveryarea.cfm" class="hpns_ordering_steps_1">
+				<div class="hpns_ordering_steps_11">
+					<div class="hpns_ordering_steps_111"><img src="http://localhost/foodx-oc/image/catalog/hpns_icons_bin.svg" alt="" class="hpns_ordering_steps_1111"></div>
+					<div class="hpns_ordering_steps_112">
+						<div class="hpns_ordering_steps_1121">Receive your groceries at your door</div>
+						<div class="hpns_ordering_steps_1122">Your order is brought to your door via sustainable, contactless delivery!</div>
+					</div>
+				</div>
+			</a>
+		</li>
+	</ul>
+
+	<div class="bti_section_ttl">
+		<div class="bti_section_ttl_line"></div>
+		<div class="bti_section_ttl_txt">Browse the aisles</div>
+		<div class="bti_section_ttl_line"></div>
+	</div>
+
 <div class="container">
 {# <div class="heading-title">
 	<div class="main-heading">{{ heading_title }}</div>
@@ -9,11 +53,11 @@
 <div id="{% if catCount >= sliderFor %}ttmcat_carousel{% else %}ttmcat-grid{% endif %}" class="category-box {% if catCount >= sliderFor %}ttmcat-carousel{% else %}ttmcatbox-grid{% endif %}">
   {% for category in categories %}
   
-	  <div class="{% if catCount >= sliderFor %}ttmcat-slider{% else %}ttmcat-item col-lg-2 col-md-2 col-sm-2 col-xs-4{% endif %}">
+	  <div class="{% if catCount >= sliderFor %}ttmcat-slider{% else %}ttmcat-item col-lg-4 col-md-4 col-sm-4 col-xs-4{% endif %}">
 		<div class="content">
-		  <div class="image">
+		  <div class="image" >
 			<a href="{{ category.href }}">
-				<img src="{{ category.thumb }}" alt="{{ category.name }}" title="{{ category.name }}" class="img-responsive" />
+				<img src="{{ category.thumb }}" alt="{{ category.name }}" title="{{ category.name }}" style="object-fit: fill; width: 300px;" class="img-responsive" />
 			</a>
 		  </div>
 		  
@@ -21,7 +65,7 @@
 		  <div class="caption">
 			<div class="cat-title">
 				<h4><a href="{{ category.href }}">{{ category.name }}</a></h4>
-				{# <span class="desc">{{ category.description [0:30] ~ '...' }}</span> #}
+				 <span class="desc">{{ category.description [0:30] ~ '...' }}</span>
 			</div>
 			{# <div class="cat-sub">
 			  {% if category.children %}
@@ -32,12 +76,15 @@
 			  </ul>
 			  {% endif %}
 		   </div> #}
-		  </div> 
+		  </div>
 		  <!-- Category Caption END -->
 		  
 		</div>
 	  </div>
   {% endfor %}
+
+
+
 </div>
 </div>
 </div>
