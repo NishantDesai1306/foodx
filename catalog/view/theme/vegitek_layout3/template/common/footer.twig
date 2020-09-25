@@ -1,57 +1,65 @@
 <footer>
-   <div id="footer">
-     <div class="footer_top">
-      <div class="container">
-	    <div class="row">
-			{{ footer_top }}
-		</div>
-	  </div>
-	 </div>
+    <div id="footer">
+        <div class="footer_top">
+            <div class="container">
 
-      <div class="footer_center">
-         <div class="container">
-            <div class="row">
-               <div class="col-sm-3 column first">
-			      <div class="footer-logo">
-					<div id="logo">{% if footerlogo %}<a href="{{ home }}"><img src="{{ footerlogo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive" /></a>{% else %}
-					  <h1><a href="{{ home }}">{{ name }}</a></h1>
-					  {% endif %}
-					</div>
-			      </div>
-				  {{ footer_left }}
-               </div>
-               {% if informations %}
-               <div class="col-sm-3 column second">
-                  <h5>{{ text_information }}</h5>
-                  <ul class="list-unstyled">
-                     {% for information in informations %}
-                     <li><a href="{{ information.href }}">{{ information.title }}</a></li>
-                     {% endfor %}
-                     <li><a href="{{ contact }}">{{ text_contact }}</a></li>
-                  </ul>
-               </div>
-               {% endif %}
-               <div class="col-sm-3 column third">
-                  <h5>{{ text_extra }}</h5>
-                  <ul class="list-unstyled">
-				    {% if module_status %}
-					    <li><a href="{{ gallery_album }}">{{ text_gallery }}</a></li>
-				    {% endif %}
-                     <li><a href="{{ manufacturer }}">{{ text_manufacturer }}</a></li>
-                     {#<li><a href="{{ voucher }}">{{ text_voucher }}</a></li>
+
+                <div class="row">
+                    {{ footer_top }}
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="footer_center " >
+            <div class="ftr_tst" id="bottom_green_block">
+                <div class="pillars_top" id="pillars_top_ftr">
+                    <div class="sus_pillars_area is_visible">
+                        <div class="sus_pillars_left">
+                            <a href="#" title="RESPONSIBLE TRANSPORT"><img src="https://cdn.spud.ca/gifs/Sustainability_Pillars_RT_White_Sm.svg" alt="" class="pillars_img" width="184" height="110"></a>
+                            <a href="#" title="FIGHTING FOOD WASTE"><img src="https://cdn.spud.ca/gifs/Sustainability_Pillars_FFW_White_Sm.svg" alt="" class="pillars_img" width="117" height="110"></a>
+                            <a href="#" title="BUYING WITH PURPOSE"><img src="https://cdn.spud.ca/gifs/Sustainability_Pillars_BWP_White_Desktop_Sm.svg" alt="" class="pillars_img" width="80" height="110"></a>
+                            <a href="#" title="CLOSING THE LOOP"><img src="https://cdn.spud.ca/gifs/Sustainability_Pillars_CTL_White_Sm.svg" alt="" class="pillars_img" width="108" height="110"></a>
+                            <a href="#" title="CULTIVATE HEALTHY COMMUNITY"><img src="https://cdn.spud.ca/gifs/Sustainability_Pillars_CHC_White_Sm.svg" alt="" class="pillars_img" width="135" height="110"></a>
+                        </div>
+                        <div class="sus_pillars_right"><a href="https://www.bcorporation.net/community/spudca" target="_blank "><img src="https://cdn.spud.ca/gifs/bcorpF.png" width="50" class="pillars_img_box"></a></div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        {% if informations %}
+                            <div class="col-sm-3 column second">
+                                <h5>{{ text_information }}</h5>
+                                <ul class="list-unstyled">
+                                    {% for information in informations %}
+                                        <li><a href="{{ information.href }}">{{ information.title }}</a></li>
+                                    {% endfor %}
+                                    <li><a href="{{ contact }}">{{ text_contact }}</a></li>
+                                </ul>
+                            </div>
+                        {% endif %}
+                        <div class="col-sm-3 column third">
+                            <h5>{{ text_extra }}</h5>
+                            <ul class="list-unstyled">
+                                {% if module_status %}
+                                    <li><a href="{{ gallery_album }}">{{ text_gallery }}</a></li>
+                                {% endif %}
+                                <li><a href="{{ manufacturer }}">{{ text_manufacturer }}</a></li>
+                                {#<li><a href="{{ voucher }}">{{ text_voucher }}</a></li>
                        
                      <li><a href="{{ affiliate }}">{{ text_affiliate }}</a></li>
-                     #}
-                     <li><a href="{{ special }}">{{ text_special }}</a></li>
-                     <li><a href="{{ account }}">{{ text_account }}</a></li> 
-                     <li><a href="{{ sitemap }}">{{ text_sitemap }}</a></li>
-                  </ul>
-               </div>
-			   {% if informations %}
-               <div class="col-sm-3 column forth">
-			    {{ footer_right }}
-				
-				{# <div class="ttmgallery-content gallery_album_carousel">
+                                #}
+                                <li><a href="{{ special }}">{{ text_special }}</a></li>
+                                <li><a href="{{ account }}">{{ text_account }}</a></li>
+                                <li><a href="{{ sitemap }}">{{ text_sitemap }}</a></li>
+                            </ul>
+                        </div>
+                        {% if informations %}
+                        <div class="col-sm-3 column forth">
+                            {{ footer_right }}
+
+                            {# <div class="ttmgallery-content gallery_album_carousel">
 				
 				 {% for row in gallery_albums|batch(2, 'No item') %}
 				 <div class="gallery">
@@ -66,36 +74,41 @@
 					</div>					
 				 {% endfor %} 
 				</div> #}
-				
-			   </div>
-			    {% endif %}
-				
+
+                        </div>
+
+                    {% endif %}
+
+                    <div class="col-sm-3 column first">
+                        <div class="footer-logo">
+                            <div id="logo">{% if footerlogo %}<a href="{{ home }}"><img src="{{ footerlogo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive" /></a>{% else %}
+                                    <h1><a href="{{ home }}">{{ name }}</a></h1>
+                                {% endif %}
+                            </div>
+
+                            {{ footer_left }}
+                        </div>
+                    </div>
+                </div>
             </div>
-         </div>
-      </div>
-	  
-	  <div class="footer_middle">
-         <div class="container">
-			<div class="row">
-			   {{ footer_middle }}
-			</div>
-	     </div>
-	  </div>
-      <div class="footer_bottom">
-         <div class="container">
-            <div class="copyright-block"></div>
-            {{ footer_bottom }}
-         </div>
-      </div>
-   </div>
+        </div>
+
+
+        <div class="footer_bottom">
+            <div class="container">
+
+                {{ footer_bottom }}
+            </div>
+        </div>
+    </div>
 </footer>
 {% for script in scripts %}
-<script src="{{ script }}" type="text/javascript"></script>
+    <script src="{{ script }}" type="text/javascript"></script>
 {% endfor %}
 <!--
    OpenCart is open source software and you are free to remove the powered by OpenCart if you want, but its generally accepted practise to make a small donation.
    Please donate via PayPal to donate@opencart.com
-   //--> 
+   //-->
 </main>
 </section>
 </body></html>

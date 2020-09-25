@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title'] = 'topselling collection';
+$_['heading_title'] = 'Check out community favourites:';
 
 // Text
 $_['text_tax']      = 'Ex Tax:';
