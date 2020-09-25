@@ -346,16 +346,16 @@ $(document).ready(function() {
         smartSpeed: 1000,
         responsive: {
             1300: {
-                items: 1
+                items: 5
             },
             980: {
-                items: 1
+                items: 4
             },
             768: {
-                items: 1
+                items: 3
             },
             480: {
-                items: 1
+                items: 2
             },
             320: {
                 items: 1
@@ -673,10 +673,10 @@ $(document).ready(function() {
 $(document).ready(function() {
     jQuery(function($) {
 
-        var max_elem = 3;
+        var max_elem = 8;
 
         if ($(window).width() <= 1299) {
-            max_elem = 2;
+            max_elem = 5;
         }
 		
 		
@@ -699,7 +699,7 @@ function additional() {
 jQuery('#additional-carousel').slick({
         vertical: true,
 		verticalSwiping: true,
-		slidesToShow: 2,
+		slidesToShow: 5,
 		slidesToScroll: 1,
         speed: 1000,
         responsive: [{
@@ -886,10 +886,10 @@ function Testimonial() {
 		autoplayHoverPause:true,
         responsive: {
             1300: {
-                items: 2
+                items: 6
             },
             980: {
-                items: 2
+                items: 5
             },
             768: {
                 items: 4
