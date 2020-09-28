@@ -1,0 +1,84 @@
+<div class="container my-5">
+	<div class="row row-eq-height">
+		<div class="col-sm-3 d-flex justify-content-center align-items-center">
+			<div>
+				<h3>
+					100% Satisfaction Guaranteed
+				</h3>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<img src="image/catalog/banners/best-grocery.jpg" />
+		</div>
+		<div class="col-sm-3 d-flex justify-content-center align-items-center">
+			<h3>
+				Free Local Delivery
+			</h3>
+		</div>
+	</div>
+
+	<div class="my-5">
+		<img class="w-100" src="image/catalog/banners/main-banner.jpg" />
+	</div>
+
+	<div class="row row-eq-height">
+		<div class="col-sm-4 d-flex flex-column align-items-center">
+			<div>
+				<img src="image/catalog/banners/step1.png" />
+			</div>
+			<div>
+				{% if register_link %}
+				<div class="mb-5 h2">
+					<div class="text-center">
+						<a href="{{register_link}}" class="text-primary">
+							Create your account
+						</a>
+					</div>
+					<div class="text-center">and confirm your order as far in advance as possible</div>
+				</div>
+				{% endif %}
+				<div class="text-center mb-5">
+					Placing orders well in advance helps ensure product availability, this helps our teams efforts to serve the community as best as we can.
+				</div>
+				{% if login_link %}
+				<div class="d-flex justify-content-center">
+					<a href="{{login_link}}" class="btn btn-primary btn-lg w-100">
+						Get Started
+					</a>
+				</div>
+				{% endif %}
+			</div>
+		</div>
+		
+		<div class="col-sm-4 d-flex flex-column align-items-center">
+			<div>
+				<img src="image/catalog/banners/step1.png" />
+			</div>
+			<div>
+				<div class="mb-5 h2">
+					<div class="text-center">Your order is packed in a close (food grade) environment that is not accessible to the public</div>
+				</div>
+				<div class="text-center mb-5">
+					The health and safety of our team and customers is our top priority.
+				</div>
+				<div class="text-center">
+					<a href="#" class="text-primary">Read more about our safety practices here</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-4 d-flex flex-column align-items-center">
+			<div>
+				<img src="image/catalog/banners/step1.png" />
+			</div>
+			<div>
+				<div class="mb-5 h2">
+					<div class="text-center">Get your order delivered straight to your door</div>
+				</div>
+				<div class="text-center mb-5">
+					Currently we offer unattended delivery to your door. You'll receive an sms text message when the order has been delivered.
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
