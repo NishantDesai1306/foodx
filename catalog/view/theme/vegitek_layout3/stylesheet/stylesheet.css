@@ -2624,8 +2624,8 @@ ul.dropmenu {
 }
 
 .dropmenu li:hover {
-	/*background-color:#f5f5f5;
-     */
+	background-color:#f5f5f5;
+    
 }
 
 .dropmenu li a {
@@ -3643,7 +3643,7 @@ ul.dropmenu {
     background: #ffffff;
     display: inline-block;
     vertical-align: top;
-    padding: 20px 30px;
+    /* padding: 20px 30px; */
 	margin-top: 10px;
 }
 #ttmblockaboutus .block-aboutus-contact-details span {
@@ -5023,11 +5023,11 @@ font-size: 16px;
 #footer {
 	clear: both;
 	position: relative;
-	background-color: #F5F5F5;
+	/* background-color: #F5F5F5; */
 }
 
 #footer .column {
-	float: left;
+	float: right;
 	border: none;
 	margin-bottom: 20px;
 	width: 20%;
@@ -5047,12 +5047,12 @@ font-size: 16px;
 }
 
 #footer .footer_top {
-	background-color: #808080;
+	background-color: #BEBEBE;
     padding: 29px 0;
 }
 
 #footer .footer_center {
-	padding: 30px 0 20px;
+	padding: 30px 0 0px;
 	clear: both;
 	overflow: hidden;
 	position: relative;
@@ -5220,7 +5220,7 @@ footer h5 {
 
 #footer .footer_bottom {
 	clear: both;
-	padding: 35px 0;
+	padding: 10px 0;
 }
 
 #footer .column ul.list-unstyled a {
@@ -12379,6 +12379,29 @@ a.instaimg img {
 		display: none;
 	}
 }
+
+@media (max-width: 840px){
+	.hpns_ordering_steps_11 {
+		margin: 0 20px 20px 40px;
+	}
+	.hpns_ordering_steps_111 {
+		transition: .3s transform;
+	}
+	.hpns_ordering_steps_1111 {
+		width: 40px;
+	}
+	.hpns_ordering_steps_112 {
+		padding-left: 10px;
+	}
+	.hpns_ordering_steps_1121, .hpns_ordering_steps_1122 {
+		font-size: 16px;
+	}
+	.hpns_ordering_steps {
+		flex-direction: column;
+	}
+}
+
+
 @media (max-width: 553px) {
 
 }
@@ -12440,7 +12463,7 @@ footer .gallery-thumbnail {
     background-color: #FFFFFF;
     border-top: 2px solid #E0E0E0;
     position: relative;
-    padding-top: 70px;
+    padding-top: 100px;
     margin-top: 100px;
     width: 100vw;
     left: 50%;
@@ -12449,13 +12472,18 @@ footer .gallery-thumbnail {
     margin-right: -50vw;
 }
 #bottom_green_block img.pillars_img {
-    height: 100px;
+    height: 60px;
     width: auto;
     margin-right: 30px;
     -webkit-transition: 1.2s height;
     -o-transition: 1.2s height;
     transition: 1.2s height;
 }
+
+#bottom_green_block .sus_pillars_area.is_visible img.pillars_img {
+    height: 110px;
+}
+
 .hpns_hero_text_box {
     width: 100%;
     max-width: 647px;
@@ -12528,3 +12556,12 @@ footer .gallery-thumbnail {
     color: #ddd;
     font: bold 16px sans-serif;
 }
+.pillars_img_box {
+    background: white;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    padding: 10px;
+    height: 110px;
+    width: auto;
+}
+

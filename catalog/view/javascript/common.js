@@ -453,6 +453,37 @@ $(document).delegate('.agree', 'click', function(e) {
 	});
 });
 
+
+function isVisible($el) {
+	var winTop = $(window).scrollTop();
+	var winBottom = winTop + $(window).height();
+	var elTop = $el.offset().top;
+	var elBottom = elTop + $el.height();
+	return ((elBottom <= winBottom) && (elTop >= winTop));
+  }
+  
+  $(function () {
+  
+	if (isVisible($("#pillars_top_ftr"))) {
+	  $(".sus_pillars_area").addClass('is_visible');
+	} else {
+	  $(".sus_pillars_area").removeClass('is_visible');
+	}
+  
+	$(window).scroll(function () {
+  
+	  if (isVisible($("#pillars_top_ftr"))) {
+		$(".sus_pillars_area").addClass('is_visible');
+	  } else {
+		$(".sus_pillars_area").removeClass('is_visible');
+	  }
+  
+	});
+  });
+
+
+
+
 // Autocomplete */
 (function($) {
 	$.fn.autocomplete = function(option) {
