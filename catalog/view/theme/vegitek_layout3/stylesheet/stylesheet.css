@@ -12503,7 +12503,11 @@ footer .gallery-thumbnail {
 
 .container_16 {
     max-width: 1666.14px;
-    margin: 0 30px;
+    margin: 0px auto;
+}
+.hpns_ordering_steps {
+    display: flex;
+    padding: 30px 10px;
 }
 
 .hpns_ordering_steps_11 {
